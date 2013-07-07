@@ -46,11 +46,11 @@
 # User Defined Variables
 #########################
 
-REDIS_HOME="/home/redis"
-REDIS_COMMANDS="/home/redis/redis.git/src"      # The location of the redis binary
+REDIS_HOME="/etc/redis"
+REDIS_COMMANDS="/usr/local/bin"      # The location of the redis binary
 REDIS_MASTER_IP="172.16.0.180"                  # Redis MASTER ip
 REDIS_MASTER_PORT="6379"                        # Redis MASTER port
-REDIS_CONF="redis-mdb.conf"                     # Filename of MASTER config
+REDIS_CONF="redis.conf"                         # Filename of MASTER config
 
 ##############
 # Exit Codes
