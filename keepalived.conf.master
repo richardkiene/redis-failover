@@ -11,19 +11,20 @@ vrrp_instance VI_ETH0 {
   interface eth0
   virtual_router_id 100
   nopreempt
-  priority 200
+  priority 101
   advert_int 1
-  state BACKUP
+  state MASTER
 
   track_script {
     chk_redis
   }
 
   virtual_ipaddress {
-    172.16.0.180
+    <virtual-ip-address>
   }
 
-  notify_master "/usr/bin/sudo -u redis /opt/redis-failover/redis.sh -m"
-  notify_backup "/usr/bin/sudo -u redis /opt/redis-failover/redis.sh -s"
-  notify_fault "/usr/bin/sudo -u redis /opt/redis-failover/redis.sh -k"
+  notify_master "/usr/bin/sudo /opt/redis-failover/redis.sh -m"
+  notify_backup "/usr/bin/sudo /opt/redis-failover/redis.sh -s"
+  notify_fault "/usr/bin/sudo /opt/redis-failover/redis.sh -k"
 }
+

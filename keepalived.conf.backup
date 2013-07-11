@@ -1,0 +1,30 @@
+global_defs {
+  router_id DBPOOL_01
+}
+
+vrrp_script chk_redis {
+  script "killall -0 redis-server"
+  interval 2
+}
+
+vrrp_instance VI_ETH0 {
+  interface eth0
+  virtual_router_id 100
+  nopreempt
+  priority 100
+  advert_int 1
+  state BACKUP
+
+  track_script {
+    chk_redis
+  }
+
+  virtual_ipaddress {
+    <virtual-ip-address>
+  }
+
+  notify_master "/usr/bin/sudo /opt/redis-failover/redis.sh -m"
+  notify_backup "/usr/bin/sudo /opt/redis-failover/redis.sh -s"
+  notify_fault "/usr/bin/sudo /opt/redis-failover/redis.sh -k"
+}
+
